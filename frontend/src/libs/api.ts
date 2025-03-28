@@ -1,8 +1,16 @@
 import { BookResponseProps } from '@/types/book';
 
-export async function getBooks(page: number, limit: number): Promise<BookResponseProps> {
-  const res = await fetch(`http://localhost:3001/api/books?page=${page}&limit=${limit}`);
-
+export async function getBooks(
+  page: number,
+  limit: number,
+  search = '',
+): Promise<BookResponseProps> {
+  const res = await fetch(
+    `http://localhost:3001/api/books?page=${page}&limit=${limit}&search=${encodeURIComponent(
+      search,
+    )}`,
+  );
+  console.log(res);
   if (!res.ok) {
     throw new Error('Fail');
   }

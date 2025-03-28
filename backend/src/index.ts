@@ -23,25 +23,35 @@ const isString = (value: unknown): boolean => {
 
 app.get('/api/books', async (req, res) => {
   try {
+    const search = (req.query.search as string)?.trim() || '';
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
+    const searchFilter = search
+      ? {
+          OR: [
+            { title: { contains: search } },
+            { author: { contains: search } },
+          ],
+        }
+      : {};
+
     const [books, total] = await Promise.all([
       prisma.book.findMany({
+        where: searchFilter,
         skip,
         take: limit,
         orderBy: { createdAt: 'desc' },
       }),
-      prisma.book.count(),
+      prisma.book.count({
+        where: searchFilter,
+      }),
     ]);
-
-    if (total === 0) {
-      return void res.status(404).json({ message: 'Not Found' });
-    }
 
     res.json({ data: books, total });
   } catch (error) {
+    console.error('[BOOKS API ERROR]', error);
     return void res.status(500).json({ message: 'Internal Server Error' });
   }
 });
