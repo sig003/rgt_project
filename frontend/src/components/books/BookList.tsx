@@ -3,7 +3,7 @@
 import { BookProps } from '@/types/book';
 import { getBooks } from '@/libs/api';
 import { useEffect, useState } from 'react';
-import ShadcnPagination from '@/components/pagination/pagination';
+import ShadcnPagination from '@/components/pagination/Pagination';
 import BookDetailModal from './BookDetailModal';
 import BookEditModal from './BookEditModal';
 import BookDeleteModal from './BookDeleteModal';

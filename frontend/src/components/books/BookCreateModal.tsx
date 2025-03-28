@@ -19,10 +19,29 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
   const [contents, setContents] = useState('');
   const [loading, setLoading] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const authorRef = useRef<HTMLInputElement>(null);
+  const contentsRef = useRef<HTMLTextAreaElement>(null);
 
   const handleCreate = async () => {
     setLoading(true);
     try {
+      if (!title.trim()) {
+        alert('제목을 입력해 주세요.');
+        titleRef.current?.focus();
+        return;
+      }
+      if (!author.trim()) {
+        alert('저자를 입력해 주세요.');
+        authorRef.current?.focus();
+        return;
+      }
+
+      if (!contents.trim()) {
+        alert('내용을 입력해 주세요.');
+        contentsRef.current?.focus();
+        return;
+      }
       await createBook({ title, author, contents });
       onCreated?.();
       closeRef.current?.click();
@@ -46,18 +65,21 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
         </DialogHeader>
         <div className="space-y-4">
           <input
+            ref={titleRef}
             className="w-full border p-2 rounded"
             placeholder="제목"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <input
+            ref={authorRef}
             className="w-full border p-2 rounded"
             placeholder="저자"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
           <textarea
+            ref={contentsRef}
             className="w-full border p-2 rounded"
             placeholder="내용"
             rows={4}
