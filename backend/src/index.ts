@@ -26,7 +26,7 @@ app.get('/api/books', async (req, res) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
-    console.log(page);
+
     const [books, total] = await Promise.all([
       prisma.book.findMany({
         skip,

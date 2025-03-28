@@ -1,5 +1,5 @@
 'use client';
-import { Paging as PagingProps } from '@/types/book';
+import { PagingProps } from '@/types/book';
 
 export default function Paging({
   currentPage,
