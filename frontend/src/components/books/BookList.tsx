@@ -3,7 +3,7 @@
 import { BookProps } from '@/types/book';
 import { getBooks } from '@/libs/api';
 import { useEffect, useState } from 'react';
-import Paging from '@/components/paging/Paging';
+import ShadcnPagination from '@/components/pagination/pagination';
 import BookDetailModal from './BookDetailModal';
 import BookEditModal from './BookEditModal';
 import BookDeleteModal from './BookDeleteModal';
@@ -103,7 +103,7 @@ export default function BookList() {
           ))
         )}
       </div>
-      <Paging currentPage={page} totalItems={total} onPageChange={setPage} />
+      <ShadcnPagination currentPage={page} totalItems={total} onPageChange={setPage} />
     </>
   );
 }

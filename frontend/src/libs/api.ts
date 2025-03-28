@@ -10,7 +10,6 @@ export async function getBooks(
       search,
     )}`,
   );
-  console.log(res);
   if (!res.ok) {
     throw new Error('Fail');
   }
