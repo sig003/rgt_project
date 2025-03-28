@@ -6,3 +6,15 @@ export interface Book {
   createdAt: string;
   modifiedAt: string;
 }
+
+export interface BookRespose {
+  data: Book[];
+  total: number;
+}
+
+export interface Paging {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage?: number;
+  onPageChange: (page: number) => void;
+}

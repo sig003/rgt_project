@@ -8,8 +8,12 @@ export default function Header() {
             placeholder="검색어를 입력하세요"
             className="w-[180px] sm:w-[220px] border px-3 py-2 rounded"
           />
-          <button className="border px-4 py-2 rounded whitespace-nowrap">검색</button>
-          <button className="border px-4 py-2 rounded whitespace-nowrap">등록</button>
+          <button className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold">
+            검색
+          </button>
+          <button className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold">
+            등록
+          </button>
         </div>
       </div>
     </header>

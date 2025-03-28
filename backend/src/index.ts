@@ -23,12 +23,25 @@ const isString = (value: unknown): boolean => {
 
 app.get('/api/books', async (req, res) => {
   try {
-    const books = await prisma.book.findMany();
-    if (books.length === 0) {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+    console.log(page);
+    const [books, total] = await Promise.all([
+      prisma.book.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.book.count(),
+    ]);
+
+    if (total === 0) {
       return void res.status(404).json({ message: 'Not Found' });
     }
-    res.json(books);
-  } catch {
+
+    res.json({ data: books, total });
+  } catch (error) {
     return void res.status(500).json({ message: 'Internal Server Error' });
   }
 });
