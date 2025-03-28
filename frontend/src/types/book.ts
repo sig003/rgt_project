@@ -35,3 +35,8 @@ export interface BookDeleteModalProps {
   children: React.ReactNode;
   onDeleted?: () => void;
 }
+
+export interface BookCreateModalProps {
+  children: React.ReactNode;
+  onCreated?: () => void;
+}

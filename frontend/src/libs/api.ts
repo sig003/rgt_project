@@ -32,3 +32,19 @@ export async function deleteBook(id: number): Promise<void> {
 
   if (!res.ok) throw new Error('삭제 실패');
 }
+
+export async function createBook(data: {
+  title: string;
+  author: string;
+  contents: string;
+}): Promise<void> {
+  const res = await fetch(`http://localhost:3001/api/books`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) throw new Error('등록 실패');
+}

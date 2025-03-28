@@ -7,6 +7,7 @@ import Paging from '@/components/paging/Paging';
 import BookDetailModal from './BookDetailModal';
 import BookEditModal from './BookEditModal';
 import BookDeleteModal from './BookDeleteModal';
+import BookCreateModal from './BookCreateModal';
 
 export default function BookList() {
   const [books, setBooks] = useState<BookProps[]>([]);
@@ -31,6 +32,25 @@ export default function BookList() {
 
   return (
     <>
+      <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 shadow-sm">
+        <div className="mx-auto max-w-screen-lg h-[64px] flex items-center justify-center px-4">
+          <div className="flex items-center justify-center gap-2 flex-nowrap">
+            <input
+              type="text"
+              placeholder="검색어를 입력하세요"
+              className="w-[180px] sm:w-[220px] border px-3 py-2 rounded"
+            />
+            <button className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold">
+              검색
+            </button>
+            <BookCreateModal onCreated={() => setRefresh((prev) => prev + 1)}>
+              <button className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold">
+                등록
+              </button>
+            </BookCreateModal>
+          </div>
+        </div>
+      </header>
       <div className="space-y-6 max-w-3xl mx-auto">
         {books.map((book) => (
           <div key={book.id} className="flex items-start justify-between border p-4 rounded">
