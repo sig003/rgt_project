@@ -18,8 +18,6 @@ export default function ShadcnPagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  if (totalPages <= 1) return null;
-
   return (
     <Pagination className="mt-10">
       <PaginationContent>

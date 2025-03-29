@@ -30,6 +30,12 @@ export default function BookList() {
       });
   }, [page, limit, refresh, search]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearch(searchInput);
+    }
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 shadow-sm">
@@ -40,6 +46,7 @@ export default function BookList() {
               placeholder="검색어를 입력하세요"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={handleKeyDown}
               className="w-[180px] sm:w-[220px] border px-3 py-2 rounded"
             />
             <button
@@ -73,7 +80,7 @@ export default function BookList() {
 
                 <div className="space-y-2">
                   <p>
-                    제목:
+                    제목:{' '}
                     <BookDetailModal book={book}>
                       <span className="font-bold cursor-pointer">{book.title}</span>
                     </BookDetailModal>

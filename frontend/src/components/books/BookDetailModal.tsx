@@ -20,7 +20,7 @@ export default function BookDetailModal({ book, children }: BookDetailModalProps
           <DialogTitle className="text-lg font-bold">{book.title}</DialogTitle>
           <DialogDescription>{book.contents}</DialogDescription>
         </DialogHeader>
-        <div className="space-y-2 mt-4 text-sm">
+        <div className="space-y-2 mt-4">
           <p>
             저자: <strong>{book.author}</strong>
           </p>
