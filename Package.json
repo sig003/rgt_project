@@ -1,7 +1,0 @@
-{
-  "name": "rgt-project-backend",
-  "private": true,
-  "scripts": {
-    "start": "cd backend && npm run start"
-  }
-}
