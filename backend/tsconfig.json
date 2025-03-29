@@ -112,5 +112,5 @@
     "moduleResolution": "node", // ✅ 추가
     "outDir": "dist" // ✅ 추가
   },
-  "include": ["src"] // ✅ 추가
+  "include": ["src", "api"] // ✅ 추가
 }
