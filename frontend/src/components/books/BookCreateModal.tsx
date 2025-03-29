@@ -9,7 +9,7 @@ import {
   DialogFooter,
   DialogClose,
 } from '@/components/ui/dialog';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { createBook } from '@/libs/api';
 import { BookCreateModalProps } from '@/types/book';
 
@@ -18,10 +18,21 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
   const [author, setAuthor] = useState('');
   const [contents, setContents] = useState('');
   const [loading, setLoading] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const authorRef = useRef<HTMLInputElement>(null);
   const contentsRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      setTitle('');
+      setAuthor('');
+      setContents('');
+      setQuantity(0);
+    }
+  }, [open]);
 
   const handleCreate = async () => {
     setLoading(true);
@@ -42,7 +53,7 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
         contentsRef.current?.focus();
         return;
       }
-      await createBook({ title, author, contents });
+      await createBook({ title, author, contents, quantity });
       onCreated?.();
       closeRef.current?.click();
       setTitle('');
@@ -57,7 +68,7 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -77,6 +88,13 @@ export default function BookCreateModal({ children, onCreated }: BookCreateModal
             placeholder="저자"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="수량"
+            className="w-full border p-2 rounded"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
           />
           <textarea
             ref={contentsRef}

@@ -1,4 +1,5 @@
 import { BookResponseProps } from '@/types/book';
+import { API_URL } from './constants';
 
 export async function getBooks(
   page: number,
@@ -6,9 +7,7 @@ export async function getBooks(
   search = '',
 ): Promise<BookResponseProps> {
   const res = await fetch(
-    `http://localhost:3001/api/books?page=${page}&limit=${limit}&search=${encodeURIComponent(
-      search,
-    )}`,
+    `${API_URL}?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`,
   );
   if (!res.ok) {
     throw new Error('Fail');
@@ -19,9 +18,9 @@ export async function getBooks(
 
 export async function updateBook(
   id: number,
-  data: { title: string; author: string; contents: string },
+  data: { title: string; author: string; quantity: number; contents: string },
 ): Promise<void> {
-  const res = await fetch(`http://localhost:3001/api/books/${id}`, {
+  const res = await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +32,7 @@ export async function updateBook(
 }
 
 export async function deleteBook(id: number): Promise<void> {
-  const res = await fetch(`http://localhost:3001/api/books/${id}`, {
+  const res = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
   });
 
@@ -44,8 +43,9 @@ export async function createBook(data: {
   title: string;
   author: string;
   contents: string;
+  quantity: number;
 }): Promise<void> {
-  const res = await fetch(`http://localhost:3001/api/books`, {
+  const res = await fetch(`${API_URL}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

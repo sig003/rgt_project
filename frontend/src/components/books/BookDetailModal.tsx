@@ -25,6 +25,9 @@ export default function BookDetailModal({ book, children }: BookDetailModalProps
             저자: <strong>{book.author}</strong>
           </p>
           <p>
+            수량: <strong>{book.quantity}</strong>
+          </p>
+          <p>
             등록일: <strong>{translateDateFormat(book.createdAt)}</strong>
           </p>
           <p>

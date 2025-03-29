@@ -18,6 +18,7 @@ model Book {
   title     String
   contents  String
   author    String
+  quantity  Int      @default(0) 
   createdAt DateTime @default(now())
   modifiedAt DateTime @default(now())
 }

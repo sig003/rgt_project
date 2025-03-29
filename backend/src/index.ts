@@ -57,15 +57,16 @@ app.get('/api/books', async (req, res) => {
 });
 
 app.post('/api/books', async (req, res) => {
-  const { title, author, contents } = req.body;
+  const { title, author, contents, quantity } = req.body;
 
   if (!isString(title) || !isString(author) || !isString(contents)) {
     return void res.status(400).json({ message: 'Invalid Parameters' });
   }
 
   try {
+    const quantityValue = Number(quantity) ? Number(quantity) : 0;
     const insertBooks = await prisma.book.create({
-      data: { title, author, contents },
+      data: { title, author, contents, quantity: quantityValue },
     });
     res.status(201).json(insertBooks);
   } catch {
@@ -96,15 +97,22 @@ app.put('/api/books/:id', async (req, res) => {
     return void res.status(400).json({ message: 'Invalid Parameters' });
   }
 
-  const { title, author, contents } = req.body;
+  const { title, author, contents, quantity } = req.body;
   if (!isString(title) || !isString(author) || !isString(contents)) {
     return void res.status(400).json({ message: 'Invalid Parameters' });
   }
 
   try {
+    const quantityValue = Number(quantity) ? Number(quantity) : 0;
     const updateBook = await prisma.book.update({
       where: { id },
-      data: { title, author, contents, modifiedAt: new Date() },
+      data: {
+        title,
+        author,
+        contents,
+        quantity: quantityValue,
+        modifiedAt: new Date(),
+      },
     });
     res.json(updateBook);
   } catch {

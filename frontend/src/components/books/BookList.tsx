@@ -79,6 +79,7 @@ export default function BookList() {
                     </BookDetailModal>
                   </p>
                   <p>저자: {book.author}</p>
+                  <p>수량: {book.quantity}</p>
                   <p>내용: {book.contents}</p>
                 </div>
               </div>

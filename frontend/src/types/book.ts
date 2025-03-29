@@ -3,6 +3,7 @@ export interface BookProps {
   title: string;
   author: string;
   contents: string;
+  quantity: number;
   createdAt: string;
   modifiedAt: string;
 }
@@ -12,7 +13,7 @@ export interface BookResponseProps {
   total: number;
 }
 
-export interface PagingProps {
+export interface PaginationProps {
   currentPage: number;
   totalItems: number;
   itemsPerPage?: number;

@@ -17,6 +17,7 @@ export default function BookEditModal({ book, children, onUpdated }: BookEditMod
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [contents, setContents] = useState(book.contents);
+  const [quantity, setQuantity] = useState(book.quantity);
   const [loading, setLoading] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -43,7 +44,7 @@ export default function BookEditModal({ book, children, onUpdated }: BookEditMod
         return;
       }
 
-      await updateBook(book.id, { title, author, contents });
+      await updateBook(book.id, { title, author, contents, quantity });
 
       onUpdated?.();
       closeRef.current?.click();
@@ -76,6 +77,13 @@ export default function BookEditModal({ book, children, onUpdated }: BookEditMod
             placeholder="저자"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="수량"
+            className="w-full border p-2 rounded"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
           />
           <textarea
             ref={contentsRef}
