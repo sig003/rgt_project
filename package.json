@@ -1,0 +1,10 @@
+{
+  "name": "rgt-project-root",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm run start"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
