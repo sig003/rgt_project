@@ -1,12 +1,14 @@
 # RGT S/W 개발 직무 면접 전 과제
 
-<br />
+
+<br>
 ## 지원자 정보
 지원 분야: **풀스택 개발자**
 지원자 이름: **김명희**
 이메일: [sig03@naver.com](mailto:sig03@naver.com)
 
-<br />
+
+<br>
 ## FrontEnd
 
 - Stack: **Next.js, Tailwind, Shadcn**
