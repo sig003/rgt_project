@@ -41,3 +41,10 @@ export interface BookCreateModalProps {
   children: React.ReactNode;
   onCreated?: () => void;
 }
+
+export interface SearchHeaderProps {
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+  setSearch: (value: string) => void;
+  onCreated: () => void;
+}

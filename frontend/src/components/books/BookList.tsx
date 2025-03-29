@@ -7,7 +7,7 @@ import ShadcnPagination from '@/components/pagination/Pagination';
 import BookDetailModal from './BookDetailModal';
 import BookEditModal from './BookEditModal';
 import BookDeleteModal from './BookDeleteModal';
-import BookCreateModal from './BookCreateModal';
+import SearchHeader from '@/components/header/SearchHeader';
 
 export default function BookList() {
   const [books, setBooks] = useState<BookProps[]>([]);
@@ -30,39 +30,14 @@ export default function BookList() {
       });
   }, [page, limit, refresh, search]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setSearch(searchInput);
-    }
-  };
-
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 bg-white border-b z-50 shadow-sm">
-        <div className="mx-auto max-w-screen-lg h-[64px] flex items-center justify-center px-4">
-          <div className="flex items-center justify-center gap-2 flex-nowrap">
-            <input
-              type="text"
-              placeholder="검색어를 입력하세요"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="w-[180px] sm:w-[220px] border px-3 py-2 rounded"
-            />
-            <button
-              className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold"
-              onClick={() => setSearch(searchInput)}
-            >
-              검색
-            </button>
-            <BookCreateModal onCreated={() => setRefresh((prev) => prev + 1)}>
-              <button className="bg-gray-700 text-white border border-gray-700 hover:bg-gray-900 px-4 py-2 rounded whitespace-nowrap cursor-pointer font-bold">
-                등록
-              </button>
-            </BookCreateModal>
-          </div>
-        </div>
-      </header>
+      <SearchHeader
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        setSearch={setSearch}
+        onCreated={() => setRefresh((prev) => prev + 1)}
+      />
       <div className="space-y-6 max-w-3xl mx-auto">
         {loading ? (
           <p className="text-center text-gray-500 font-semibold my-10">로딩 중...</p>
