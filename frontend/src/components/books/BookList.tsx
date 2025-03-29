@@ -12,12 +12,12 @@ import SearchHeader from '@/components/header/SearchHeader';
 export default function BookList() {
   const [books, setBooks] = useState<BookProps[]>([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
   const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
+  const limit = 10;
 
   useEffect(() => {
     getBooks(page, limit, search)
